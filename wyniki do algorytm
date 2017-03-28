@@ -1,0 +1,135 @@
+Przykład 1:
+Funkcja celu: 
+Maksymalizacja: 3x1 - 3x2 - 2x3 
+
+Pod warunkami
+2x1 - 2x2 - x3 + x4 = 4
+-x1 + x2 - 3x3 + x5 = -5
+0 <= x1 
+0 <= x2 
+0 <= x3 
+0 <= x4 
+0 <= x5 
+
+Rozwiązanie GLPK solver:
+Maximize
+obj: 3x1 - 3x2 - 2x3 
+
+Subject To
+2x1 - 2x2 - x3 + x4 = 4
+-x1 + x2 - 3x3 + x5 = -5
+
+
+Bounds
+0 <= x1 
+0 <= x2 
+0 <= x3 
+0 <= x4 
+0 <= x5 
+
+
+Generals
+x1
+x2
+x3
+x4
+x5
+
+
+End
+
+Reading problem data
+2 rows, 5 columns, 8 non-zeros
+5 integer variables, none of which are binary
+28 lines were read
+Scaling...
+ A: min|aij| = 1  max|aij| = 3  ratio = 3
+Problem data seem to be well scaled
+GLPK Simplex Optimizer, v4.49
+2 rows, 5 columns, 8 non-zeros
+Preprocessing...
+2 rows, 3 columns, 6 non-zeros
+Scaling...
+ A: min|aij| = 1  max|aij| = 3  ratio = 3
+Problem data seem to be well scaled
+Constructing initial basis...
+Size of triangular part = 2
+ 0: obj = 0  infeas = 5 (0)
+*1: obj = -3.3333333333333335  infeas = 0 (0)
+*2: obj = 5.571428571428572  infeas = 0 (0)
+OPTIMAL SOLUTION FOUND
+{"x1":2.428571428571429,"x2":0,"x3":0.8571428571428571,"x4":0,"x5":0}
+
+Rozwiązanie programu algorytm:
+Share
+Funkcja celu osiąga wartość maksymalną w wektorze: [2.4285714285714284, 0, 0.8571428571428571, 0, 0]
+Maksymalna wartość funkcji celu 5.57142857143
+
+
+Przykład 2:
+Funkcja celu: 
+Maksymalizacja: x1 + x2 
+
+Pod warunkami
+- x1 + x2 + x3 = 4
+x1 + x4 = 3
+x2 + x5 = 2
+0 <= x1 
+0 <= x2 
+0 <= x3 
+0 <= x4 
+0 <= x5 
+
+Rozwiązanie GLPK solver:
+Maximize
+obj: 3x1 - 3x2 - 2x3 
+
+Subject To
+-x1 + x2 + x3= 1
+x1 + x4 =3
+x2 + x5 = 2
+
+
+Bounds
+0 <= x1 
+0 <= x2 
+0 <= x3 
+0 <= x4 
+0 <= x5 
+
+
+Generals
+x1
+x2
+x3
+x4
+x5
+
+
+End
+
+Reading problem data
+3 rows, 5 columns, 7 non-zeros
+5 integer variables, none of which are binary
+29 lines were read
+Scaling...
+ A: min|aij| = 1  max|aij| = 1  ratio = 1
+Problem data seem to be well scaled
+GLPK Simplex Optimizer, v4.49
+3 rows, 5 columns, 7 non-zeros
+Preprocessing...
+1 row, 2 columns, 2 non-zeros
+Scaling...
+ A: min|aij| = 1  max|aij| = 1  ratio = 1
+Problem data seem to be well scaled
+Constructing initial basis...
+Size of triangular part = 1
+*0: obj = -3  infeas = 0 (0)
+*2: obj = 1  infeas = 0 (0)
+OPTIMAL SOLUTION FOUND
+{"x1":3,"x2":0,"x3":4,"x4":0,"x5":2}
+
+
+Rozwiązanie programu algorytm:
+Funkcja celu osiąga wartość maksymalną w wektorze: [3.0, 2.0, 2.0, 0, 0]
+Maksymalna wartość funkcji celu 5.0
