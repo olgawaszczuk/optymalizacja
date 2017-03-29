@@ -1,0 +1,63 @@
+%typeset_mode True
+
+sage: A = ([-1, 1], [1, 0], [0, 1])
+sage: b = (1, 3, 2)
+sage: c = (1, 1)
+sage: P = InteractiveLPProblem(A, b, c, ["C", "B"], variable_type=">=")
+sage: show(P)
+
+sage: P.plot()
+
+sage: InteractiveLPProblemStandardForm(A, b, c, ["C", "B"])
+
+sage: P = P.standard_form()
+sage: P.run_simplex_method()
+
+sage: D = P.initial_dictionary()
+sage: D
+
+sage: D.basic_variables()
+sage: D.basic_solution()
+sage: D.objective_value()
+sage: D.is_feasible()
+sage: D.is_optimal()
+
+
+sage: D.possible_entering()
+sage: D.possible_leaving()
+
+
+sage: D2 = D
+
+sage: D2.enter("C")
+sage: D2.leave(3)
+sage: D2.update()
+
+sage: show(D2)
+sage: D2.basic_variables()
+sage: D2.basic_solution()
+sage: D2.objective_value()
+sage: D2.is_feasible()
+sage: D2.is_optimal()
+
+sage: D2.possible_entering()
+sage: D2.possible_leaving()
+
+D3 = D
+
+
+sage: D3.enter("B")
+sage: D3.leave(4)
+sage: D3.update()
+
+sage: show(D3)
+
+sage: D3.basic_variables()
+sage: D3.basic_solution()
+sage: D3.objective_value()
+sage: D3.is_feasible()
+sage: D3.is_optimal()
+
+
+sage: D3.possible_entering()
+sage: D3.possible_leaving()
