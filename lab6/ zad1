@@ -1,0 +1,9 @@
+A = ([1,2,-3], [1,8,-4], [2,-3,-7])
+b=[3, 8, 9]
+c = [3, 2, -7]
+    
+P = InteractiveLPProblemStandardForm(A, b, c)
+show(P)
+
+P.run_simplex_method()
+
