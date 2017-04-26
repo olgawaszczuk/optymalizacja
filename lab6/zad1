@@ -1,0 +1,19 @@
+A = ([1,2,-3], [1,8,-4], [2,-3,-7])
+b=[3, 8, 9]
+c = [3, 2, -7]
+    
+P = InteractiveLPProblemStandardForm(A, b, c)
+show(P)
+
+P.run_simplex_method()
+
+#Problem dualny
+Ad = ([1,1,2], [2,8,-3], [-3,-4,-7])
+bd = [3, 2, -7]
+cd = [3,8 ,9]
+
+Pd = InteractiveLPProblem(Ad, bd, cd, 'y', problem_type = 'min', constraint_type = '>=', variable_type= '>=')
+show(Pd)
+
+Pd.standard_form().run_simplex_method()
+
