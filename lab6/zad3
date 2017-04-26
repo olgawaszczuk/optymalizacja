@@ -1,0 +1,10 @@
+A = ([-1,1,1], [1,1,-1], [0,0,1])
+b=[10, 2, 3]
+c = [1, -2, -1]
+    
+P = InteractiveLPProblemStandardForm(A, b, c)
+show(P)
+
+P.run_simplex_method()
+
+P.dual().standard_form().run_simplex_method()
