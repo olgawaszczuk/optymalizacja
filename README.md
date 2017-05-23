@@ -7,5 +7,5 @@ Folder praca domowa 2:
 #wyniki do algorytm - rozwiązanie pracy domowej (28.03.2017) - przykładowe rozwiązania
 
 
-Folder praca domowa 3:
+Folder praca domowa 4:
 #Colonel Blotto - rozwiązanie pracy domowej (23.05.2017)
