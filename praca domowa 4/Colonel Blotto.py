@@ -1,19 +1,21 @@
-#Założenia programu - Strategia wygrywająca: +1 punkt, remis: + 0,5 punkta, strategia przegrywająca: -1 punkt.
-# Strategie gracza A: (2,2,2) z prawdopodobieństwem x1, (1,2,3) z prawdopodobieństwem x2, (1,1,4) z prawdopodobieństwem x3. Dla drugiego gracza analogiczne oznaczenia y1, y2, y3.
+#Założenia programu - Strategia wygrywająca: +1 punkt, remis: + 0 punkta, strategia przegrywająca: -1 punkt.
+# Strategie gracza A: xi - prawdopodobieństwa strategii.
+# x1: (1,1,4), x2: (1,2,3), x3: (1,3,2), x4: (1,4,1), x5: (2,1,3), x6: (2,2,2), x7: (2, 3,1), x8: (3,1,2), x9: (3, 2,1), x10: (4, 1, 1)
+#Dla drugiego gracza analogiczne oznaczenia y1, y2, y3, y4, y5, y6, y7, y8, y9, y10.
 
 # Rozwiązanie w sage:
 #Oryginalny problem:
-print("Chcemy zmaksymalizować funkcję celu: y1(0.5x1 + 0.5x2 -x3) + y2(0.5x1 +0.5x2 + 0.5x3) + y3(x1 + 0.5x2 + 0.5x3)")
+print("Chcemy zmaksymalizować funkcję celu: y1(x6 + x7 + x9) + y2(x7 - x8 - x10) + y3(x4 - x9 - x10) + y4(x3 + x5 + x6 + x8) + y5(-x4 + x9) + y6(-x1 - x4 - x10) + y7(-x1 -x2 + x8) + y8(x2 - x4 + x7) + y9(-x1 + x3 - x5) + y10(x2 + x3 + x6)")
 
 #Problem dualny:
-matrixA = ([1, -0.5 , -0.5 , 1] , [1, -1, -0.5, -0.5], [1, -0.5, -0.5, -0.5], [0, 1, 1, 1], [0, 1, 1, 1])
-vector_b = (0, 0, 0, 1, 1)
-vector_c = (1, 0, 0, 0)
+matrixA = ([1,0,0,0,0,0,-1,-1,0,-1,0], [1,0,0,0,0,0,0,-1,1,0,1], [1,0,0,0,-1,0,0,0,0,1,1], [1,0,0,-1,0,-1,-1,0,-1,0,0],[1,0,0,0,1,0,0,0,0,-1,0],[1,1,0,0,1,0,0,0,0,0,1], [1,1,1,0,0,0,0,0,-1,0,0], [1,0,-1,0,1,0,0,-1,0,0,0], [1,1,0,-1,0,1,0,0,0,0,0], [1,0,-1,-1,0,0,-1,0,0,0,0], [0,1,1,1,1,1,1,1,1,1,1], [0,1,1,1,1,1,1,1,1,1,1])
+vector_b = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1)
+vector_c = (1, 0, 0, 0, 0, 0,0, 0, 0, 0, 0)
 
-constraints = ["<=", "<=", "<=", "<=", ">="]
-variables = ["", ">=", ">=", ">="]
+constraints = ["<=", "<=", "<=", "<=","<=", "<=", "<=", "<=", "<=", "<=", "<=",">="]
+variables = ["", ">=", ">=", ">=" , ">=" , ">=" , ">=" , ">=" , ">=", ">=", ">="]
 
-P = InteractiveLPProblem(matrixA, vector_b, vector_c, ["z", "x1", "x2", "x3"], constraint_type = constraints, variable_type=variables)
+P = InteractiveLPProblem(matrixA, vector_b, vector_c, ["z", "x1", "x2", "x3", "x4", "x5", "x6", "x7", "x8", "x9", "x10"], constraint_type = constraints, variable_type=variables)
 show(P)
 
 #Zamiana problemu do postaci normalnej
@@ -24,28 +26,3 @@ show(Pn.run_simplex_method())
 
 
 
-Poniżej rozwiązanie w solverze GLPK:
-\* Problem: colonels *\
-
-Maximize
-obj: z
-
-Subject To
-c1: z - 0.5x1 - 0.5x2 + x3 <= 0
-c2: z - 0.5x1 - 0.5x2 - 0.5x3 <= 0
-c3: z - x1 - 0.5x2 + 0.5x3 <= 0
-c4: x1 + x2 + x3 = 1
-
-Bounds
-0 <= x1 <= 1
-0 <= x2 <= 1
-0 <= x3 <= 1
-
-
-Generals
-x1
-x2
-x3
-
-
-End
