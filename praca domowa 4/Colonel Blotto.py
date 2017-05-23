@@ -23,6 +23,3 @@ Pn = P.standard_form()
 show(Pn)
 
 show(Pn.run_simplex_method())
-
-
-
