@@ -27,3 +27,4 @@ def maximal_objective_entering(self):
                 entering = entering_variable
                 leaving = leaving_variable
     return(entering)
+
