@@ -28,3 +28,10 @@ def maximal_objective_entering(self):
                 leaving = leaving_variable
     return(entering)
 
+def uniform_entering(self):
+    set = Set(self.possible_entering())
+    return(set.random_element())
+
+def uniform_leaving(self):
+    set = Set(self.possible_leaving())
+    return(set.random_element())
