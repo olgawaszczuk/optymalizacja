@@ -35,3 +35,15 @@ def uniform_entering(self):
 def uniform_leaving(self):
     set = Set(self.possible_leaving())
     return(set.random_element())
+
+#Pomocnicze
+self.objective_coefficients()
+max(self.objective_coefficients())
+
+set_entering = Set(self.possible_entering())
+set_entering
+set_entering.cardinality()
+
+m =  matrix(set_entering.cardinality())
+for i in range(set_entering.cardinality()):
+        m[i] = i
