@@ -60,6 +60,41 @@ def maximal_objective_entering(self):
                 leaving = leaving_variable
     return(entering)
 
+
+
+#Inaczej:
+ 
+def wartosc_f_celu(self, entering, leaving):
+    self.enter(entering)
+    self.leave(leaving)
+    self.update
+    return self.objective_value()
+
+def co_wyrzucic(self, const_var):
+    leaving_index = -1
+    set_leaving = self.possible_leaving()
+    objective_function = self.objective_value()
+    for variable in set_leaving:
+        f_celu = wartosc_f_celu(self, const_var, variable)
+        if f_celu > objective_function:
+            objective_function = f_celu
+            leaving_index = set_leaving.index(variable)
+    return set_leaving[leaving_index]
+
+def maximal_objective_entering(self):
+    print("max_obj")
+    set_entering = self.possible_entering()
+    set_leaving = self.possible_leaving()
+    objective = self.objective_value()
+    entering_index = -1
+    for variable_enter in set_entering:
+        print(variable)
+        leaving = co_wyrzucic(self, const_var)
+        objective_for_variable = wartosc_f_celu(self, variable_enter, leaving)
+        if objective_for_variable > objective:
+            objective = objective_for_variable
+            entering_index = set_entering.index(variable_enter)
+    return set_entering[entering_index]
 # Rozkład jednostajny
 def uniform_entering(self):
     set = Set(self.possible_entering())
