@@ -1,13 +1,34 @@
 # Maksymalny współczynnik
 def maximal_coefficient_entering(self):
-    entering_variable = list(self.possible_entering()) #Jak zdefiniować zbiór wszystkich zmiennych?
-    coefficient_values = list(self.objective_coefficients())
-    return(entering_variable[coefficient_values.index(max(coefficient_values))])
+    values = self.possible_entering()
+    print "maximal_coefficient_entering:"
+    max_coefficient = -99999999999
+    max_coefficient_index = -1
+    print values
+    for value in values:
+        print value
+        print value.element()
+        current_coefficient = value.coefficient({value: 1})
+        if current_coefficient > max_coefficient:
+            max_coefficient = current_coefficient
+            max_coefficient_index = values.index(value)
+    return values[max_coefficient_index]
+
 
 def maximal_coefficient_leaving(self):
-    entering_variable = list(self.possible_entering())
-    coefficient_values = list(self.objective_coefficients())
-    return(entering_variable[coefficient_values.index(min(coefficient_values))])
+    values = self.possible_leaving()
+    print "maximal_coefficient_leaving:"
+    max_coefficient = -99999999999
+    max_coefficient_index = -1
+    print values
+    for value in values:
+        print value
+        print value.element()
+        current_coefficient = value.coefficient({value: 1})
+        if current_coefficient > max_coefficient:
+            max_coefficient = current_coefficient
+            max_coefficient_index = values.index(value)
+return values[max_coefficient_index]
 
 # Maksymalna funkcja celu
 def maximal_objective_entering(self):
