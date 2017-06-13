@@ -104,6 +104,30 @@ def uniform_leaving(self):
     set = Set(self.possible_leaving())
     return(set.random_element())
 
+
+# minimalny index
+def wypluj_nowy_dictionary(self, entering,leaving):
+    self.enter(entering)
+    self.leave(leaving)
+    self.update
+    return self
+
+def minimal_index(self):
+    entering_index = -1
+    leaving_index = -1
+    set_entering = self.possible_entering()
+    set_leaving = self.possible_leaving()
+    leaving_variable_index = 0
+    for variable1 in set_entering:
+        for variable2 in set_leaving:
+            self = wypluj_nowy_dictionary(self, variable1,variable2)
+            if self.is_dual_feasible() = "FALSE":
+                entering_index = set_entering[variable1]
+                leaving_index = set_leaving[variable2]
+    return set_entering[entering_index]
+
+
+
 #Pomocnicze
 self.objective_coefficients()
 max(self.objective_coefficients())
