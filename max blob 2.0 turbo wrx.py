@@ -2,7 +2,7 @@
 # Rozne implementacje pivot rules
 
 
-#
+# Pkt1. Zmienna wchodząca o największym współczynniku
 def maximal_coefficient_entering(self):
     values = self.possible_entering()
     max_coefficient = -99999999999
@@ -18,7 +18,7 @@ def maximal_coefficient_entering(self):
     return values[max_coefficient_index]
     
     
-#Opcja 2 ?
+#Opcja 2 ? Tu leaving nie działa
 def maximal_coefficient_entering(self):
     variables = list(self.possible_entering())
     list_nonbasic = list(self.nonbasic_variables())
@@ -58,7 +58,59 @@ def maximal_coefficient_leaving(self):
             max_coefficient_index = values.index(value)
     return values[max_coefficient_index]
 
+#Pkt 2. Zmienna maksymalizująca funkcję celu
+def get_new_dictionary(self, entering, leaving):
+    self.enter(entering)
+    self.leave(leaving)
+    self.update
+    return self
 
+def get_possible_leaving(self, entering):
+    self.enter(entering)
+    return list(self.possible_leaving())
+    
+     
+def maximal_objective_entering(self):
+    print("max_obj")
+    set_entering = self.possible_entering()
+    set_leaving = self.basic_variables()
+    objective = self.objective_value()
+    entering_index = -1
+    print set_entering
+    print set_leaving
+    for variable_enter in set_entering:
+        print("set:")
+        get_possible_leaving(self, variable_enter)
+        for variable_leave in get_possible_leaving(self, variable_enter):
+            current_objective_function = get_new_dictionary(self, variable_enter, variable_leave).objective_value()
+            print variable_enter
+            print variable_leave
+            print ("obj funct:")
+            print current_objective_function
+            entering_index = set_entering.index(variable_enter)
+            print entering_index
+    return set_entering[entering_index]
+
+def maximal_objective_leaving(self):
+    print("max_obj")
+    set_entering = self.possible_entering()
+    set_leaving = self.basic_variables()
+    objective = self.objective_value()
+    entering_index = -1
+    print set_entering
+    print set_leaving
+    for variable_enter in set_entering:
+        for variable_leave in get_possible_leaving(self, variable_enter):
+            current_objective_function = get_new_dictionary(self, variable_enter, variable_leave).objective_value()
+            print variable_enter
+            print variable_leave
+            print ("obj funct:")
+            print current_objective_function
+            leaving_index = set_leaving.index(variable_leave)
+            print leaving_index
+    return set_leaving[leaving_index]
+    
+    
 # Porzadek leksykograficzny, minimum
 
 def lexicographical_min_entering(self):
