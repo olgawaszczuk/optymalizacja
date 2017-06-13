@@ -88,8 +88,8 @@ def maximal_objective_entering(self):
     objective = self.objective_value()
     entering_index = -1
     for variable_enter in set_entering:
-        print(variable)
-        leaving = co_wyrzucic(self, const_var)
+        print(variable_enter)
+        leaving = co_wyrzucic(self, variable_enter)
         objective_for_variable = wartosc_f_celu(self, variable_enter, leaving)
         if objective_for_variable > objective:
             objective = objective_for_variable
