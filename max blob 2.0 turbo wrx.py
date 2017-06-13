@@ -159,7 +159,70 @@ def random_leaving(self):
     set = Set(self.possible_leaving())
 return(set.random_element())
 
+#Wybór elementu o największej różnicy współczynników w ograniczeniach 
+def max_bounds_difference_entering(self):
+    print("max bound:")
+    variables = self.possible_entering()
+    list_of_differences = {}
+    print (variables)
+    for variable in variables:
+        print variable
+        list_of_coefficients = self.column_coefficients(variable)
+        difference = 0
+        for i in range(len(list_of_coefficients)):
+            difference = abs(difference - list_of_coefficients[i])
+        list_of_differences[variable] = difference
+        print ("list of diff:")
+        print list_of_differences
+        maximal = 0
+        key_maximal = 0
+        for key in list_of_differences:
+            temporary = list_of_differences[key]
+            print ("temporary:")
+            print key_maximal          
+            print temporary
+            if temporary > maximal:
+                maximal = temporary
+                key_maximal = key
+        print("max enter:")
+        print maximal
+        print key_maximal
+        print variables.index(key_maximal)
+    return key_maximal
 
+#Uwaga column_coefficients(variable) działa tylko dla nonbasic variables. Na leaving jakoś inaczej metodę
+def max_bounds_difference_leaving(self):
+    print("max bound:")
+    variables = self.possible_leaving()
+    list_of_differences = {}
+    print (variables)
+    for variable in variables:
+        print variable
+        list_of_coefficients = self.column_coefficients(variable)
+        print list_of_coefficients
+        difference = 0
+        for i in range(len(list_of_coefficients)):
+            difference = abs(difference - list_of_coefficients[i])
+        list_of_differences[variable] = difference
+        print ("list of diff:")
+        print list_of_differences
+        maximal = 0
+        key_maximal = 0
+        for key in list_of_differences:
+            temporary = list_of_differences[key]
+            print ("temporary:")
+            print key_maximal          
+            print temporary
+            if temporary > maximal:
+                maximal = temporary
+                key_maximal = key
+        print("max:")
+        print maximal
+        print key_maximal
+    return key_maximal
+        
+
+       
 
 
 
