@@ -110,8 +110,60 @@ def maximal_objective_leaving(self):
             print leaving_index
     return set_leaving[leaving_index]
     
-    
-# Porzadek leksykograficzny, minimum
+# zad 4 Bland'd Rule (wybieramy zmienną o najmniejszym indeksie której reduced cost jest ujemny, tzn problem dualny nie jest feasible)
+def bland_rule_entering(self):
+    print ("max index:")
+    list_variables = {}
+    set_entering = self.possible_entering()
+    set_leaving = self.basic_variables()
+    print set_entering
+    for variable_enter in set_entering:
+        for variable_leave in get_possible_leaving(self, variable_enter):
+            new_self = get_new_dictionary(self, variable_enter, variable_leave)
+            if not new_self.is_dual_feasible():
+                list_variables[variable_enter] = variable_enter
+                print ("zmienne entering:")
+                print variable_enter
+                print variable_leave
+                print ("lista:")
+                print list_variables
+                print min(list_variables)
+    return min(list(list_variables))
+
+def bland_rule_leaving(self):
+    print ("min index:")
+    list_variables = {}
+    set_entering = self.possible_entering()
+    set_leaving = self.basic_variables()
+    for variable_enter in set_entering:
+        for variable_leave in get_possible_leaving(self, variable_enter):
+            new_self = get_new_dictionary(self, variable_enter, variable_leave)
+            if not new_self.is_dual_feasible():
+                list_variables[variable_enter] = variable_leave
+                print ("zmienne entering:")
+                print variable_enter
+                print variable_leave
+                print ("lista:")
+                print list_variables
+                print min(list_variables)
+    return min(list(list_variables))
+
+
+# Funkcje własne:
+#Wybór losowego elementu ze zbioru
+def random_entering(self):
+    set = Set(self.possible_entering())
+    return(set.random_element())
+
+def random_leaving(self):
+    set = Set(self.possible_leaving())
+return(set.random_element())
+
+
+
+
+
+#Porzadek leksykograficzny, minimum
 
 def lexicographical_min_entering(self):
     return min(self.possible_entering())
