@@ -36,7 +36,6 @@ def get_possible_leaving(self, entering):
     
      
 def maximal_objective_entering(self):
-    print("max_obj")
     set_entering = self.possible_entering()
     set_leaving = self.basic_variables()
     objective = self.objective_value()
@@ -63,7 +62,6 @@ def maximal_objective_leaving(self):
 
 #Bland rule dla indeksu
 def bland_rule_entering(self):
-    print ("bland enter:")
     list_variables = {}
     set_entering = self.possible_entering()
     set_leaving = self.basic_variables()
