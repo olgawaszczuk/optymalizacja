@@ -1,0 +1,9 @@
+Maximize
+3 quantity_produced(p1) + 2 quantity_produced(p2)
+
+Subject To
+4 quantity_produced(p1) + 2 quantity_produced(p2) <= 15
+quantity_produced(p1) + 2 quantity_produced(p2) <= 8
+quantity_produced(p1) + quantity_produced(p2) <= 5
+
+End
