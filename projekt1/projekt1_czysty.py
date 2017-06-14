@@ -147,7 +147,6 @@ def max_bounds_difference_leaving(self, variable_enter):
         new_self2.leave(variable)
         new_self2.update()
         list_of_differences = {}
-        print variable
         list_of_coefficients = new_self2.column_coefficients(variable)
         difference = 0
         for i in range(len(list_of_coefficients)):
