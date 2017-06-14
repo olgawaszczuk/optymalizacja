@@ -41,40 +41,24 @@ def maximal_objective_entering(self):
     set_leaving = self.basic_variables()
     objective = self.objective_value()
     entering_index = -1
-    print set_entering
-    print set_leaving
     for variable_enter in set_entering:
-        print("set:")
         get_possible_leaving(self, variable_enter)
         for variable_leave in get_possible_leaving(self, variable_enter):
             current_objective_function = get_new_dictionary(self, variable_enter, variable_leave).objective_value()
-            print variable_enter
-            print variable_leave
-            print ("obj funct:")
-            print current_objective_function
             if current_objective_function > objective:
                 entering_index = set_entering.index(variable_enter)
-            print entering_index
     return set_entering[entering_index]
 
 def maximal_objective_leaving(self):
-    print("max_obj")
     set_entering = self.possible_entering()
     set_leaving = self.basic_variables()
     objective = self.objective_value()
     entering_index = -1
-    print set_entering
-    print set_leaving
     for variable_enter in set_entering:
         for variable_leave in get_possible_leaving(self, variable_enter):
             current_objective_function = get_new_dictionary(self, variable_enter, variable_leave).objective_value()
-            print variable_enter
-            print variable_leave
-            print ("obj funct:")
-            print current_objective_function
             if current_objective_function > objective:
                 leaving_index = set_leaving.index(variable_leave)
-            print leaving_index
     return set_leaving[leaving_index]
 
 #Bland rule dla indeksu
@@ -83,7 +67,6 @@ def bland_rule_entering(self):
     list_variables = {}
     set_entering = self.possible_entering()
     set_leaving = self.basic_variables()
-    print set_entering
     for variable_enter in set_entering:
         new_self = deepcopy(self)
         for variable_leave in get_possible_leaving(new_self, variable_enter):
@@ -100,13 +83,11 @@ def bland_rule_leaving(self, variable_enter):
     return min(list_leaving)
 #Test:
 def my_entering(self):
-    print "Final entering: {}".format(bland_rule_entering(self))
     return bland_rule_entering(self)
 
 
 def my_leaving(self):
     value_entering = bland_rule_entering(self)
-    print "Final leaving: {}".format(bland_rule_leaving(self, value_entering))
     return bland_rule_leaving(self, value_entering)
 
 # Zad 5: Wybór losowego elementu (prawdopodobieństwo jednostajne):
@@ -149,38 +130,25 @@ def max_bounds_difference_entering(self):
     print("max bound:")
     variables = self.possible_entering()
     list_of_differences = {}
-    print (variables)
     for variable in variables:
-        print variable
         list_of_coefficients = self.column_coefficients(variable)
         difference = 0
         for i in range(len(list_of_coefficients)):
             difference = abs(difference - list_of_coefficients[i])
         list_of_differences[variable] = difference
-        print ("list of diff:")
-        print list_of_differences
         maximal = 0
         key_maximal = 0
         for key in list_of_differences:
             temporary = list_of_differences[key]
-            print ("temporary:")
-            print key_maximal          
-            print temporary
             if temporary > maximal:
                 maximal = temporary
                 key_maximal = key
-        print("max enter:")
-        print maximal
-        print key_maximal
-        print variables.index(key_maximal)
     return key_maximal
 
 def max_bounds_difference_leaving(self, variable_enter):
     new_self = deepcopy(self)
     list_leaving = []
     list_of_differences = {}
-    print ("TU1")
-    print new_self.nonbasic_variables()
     for variable_leave in get_possible_leaving(new_self, variable_enter):
         new_self = get_new_dictionary(new_self, variable_enter, variable_leave)
         list_leaving.append(variable_leave)
@@ -189,8 +157,6 @@ def max_bounds_difference_leaving(self, variable_enter):
         new_self2.enter(variable_enter)
         new_self2.leave(variable)
         new_self2.update()
-        print ("TU")
-        print new_self2.nonbasic_variables()
         list_of_differences = {}
         print variable
         list_of_coefficients = new_self2.column_coefficients(variable)
@@ -198,20 +164,11 @@ def max_bounds_difference_leaving(self, variable_enter):
         for i in range(len(list_of_coefficients)):
             difference = abs(difference - list_of_coefficients[i])
         list_of_differences[variable] = difference
-        print ("list of diff:")
-        print list_of_differences
         maximal = 0
         key_maximal = 0
         for key in list_of_differences:
             temporary = list_of_differences[key]
-            print ("temporary:")
-            print key_maximal          
-            print temporary
             if temporary > maximal:
                 maximal = temporary
                 key_maximal = key
-        print("max enter:")
-        print maximal
-        print key_maximal
-        print list_leaving.index(key_maximal)
     return key_maximal
