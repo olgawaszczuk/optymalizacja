@@ -1,5 +1,6 @@
 Projekt autorstwa: Olga Waszczuk, Małgorzata Łukomska
 
+Całe podsumowanie projektu jest dostępne w pliku raport.pdf.
 
 W pliku methods(pivot rules).py można znaleźć implementację następujących metod warunkujących wybór zmiennych wchodzących i wychodzących z programu liniowego (przy czym zachowałyśmy konwencję "nazwa_funkcji_entering" wybiera zmienną wchodzącą do programu, zaś "nazwa_funkcji_leaving" wybiera zmienną wychodzącą, bazując na zadanej regule) :
 1) largest_coefficient: 
@@ -29,3 +30,5 @@ Funkcja zwraca największą zmienną wśród możliwych zmiennych wchodzących i
 
 W folderze "problems" znaleźć można 10 wybranych problemów liniowych, dla których przeprowadziłyśmy kolejno wybór zmiennych zgodnie z każdą z wymienionych powyżej metod.
 W folderze "testy" zaprezentowane są wyniki wspomnianych testów i krótkie wnioski na temat metod wyboru zmiennych.
+
+
