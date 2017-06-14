@@ -22,3 +22,7 @@ Funkcja zwraca najmniejszą zmienną wśród możliwych zmiennych wchodzących i
 
 8) lexicographical_max:
 Funkcja zwraca największą zmienną wśród możliwych zmiennych wchodzących i wychodzących do programu, gdzie ułożenie zmiennych podlega pod porządek leksykograficzny.
+
+
+W folderze "problems" znaleźć można 10 wybranych problemów liniowych, dla których przeprowadziłyśmy kolejno wybór zmiennych 
+file:///home/ola/Dokumenty/STUDIA/MIM%20UW/III%20rok/opta/tabela.jpg
