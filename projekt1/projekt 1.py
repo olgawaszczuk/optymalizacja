@@ -1,9 +1,7 @@
 #punkt 1: Wybór zmiennej o największym wspołczynniku funkcji celu
 
-#dwie funkcje pomocnicze
-#wybór zmiennych bazowych
 def potencjalne_zmienne(ss, z):
-	return list(ss.nonbasic_variables()).index(z)\
+	return list(ss.possible_entering()).index(z)
 
 #wszystkie współczynniki w funkcji celu zmiennych wcześniej wybranych
 def coef(ss, z):
@@ -11,20 +9,19 @@ def coef(ss, z):
 
 # Wybór zmiennej o największym wspołczynniku funkcji celu
 def largest_coefficient(self):
-	return max(self.possible_entering(), key=(lambda x: coef(self, x) ) )
-
-#dwie funkcje pomocnicze dla zmiennych wychodzących
+    return max(self.possible_entering(), key=(lambda x: coef(self, x) ) )
 
 #wybór zmiennych bazowych
 def potencjalne_zmienne_b(ss, z):
-	return list(ss.basic_variables()).index(z)
+	return ss.possible_leaving().index(z)
 
 #wszystkie współczynniki w funkcji celu zmiennych wcześniej wybranych
 def coef_b(ss, z):
     return ss.objective_coefficients()[potencjalne_zmienne_b(ss,z)]
+
 # Wybór zmiennej o największym wspołczynniku funkcji celu
 def largest_coefficient_leaving(self):
-	return max(self.possible_leaving(), key=(lambda x: coef_b(self, x) ) )
+    return max(self.possible_leaving(), key=(lambda x: coef_b(self, x) ) )
 
 #Pkt 2. Zmienna maksymalizująca funkcję celu
 def get_new_dictionary(self, entering, leaving):
