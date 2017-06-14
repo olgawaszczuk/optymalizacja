@@ -25,4 +25,4 @@ Funkcja zwraca największą zmienną wśród możliwych zmiennych wchodzących i
 
 
 W folderze "problems" znaleźć można 10 wybranych problemów liniowych, dla których przeprowadziłyśmy kolejno wybór zmiennych zgodnie z każdą z wymienionych powyżej metod.
-W folderze "testy" zaprezentowane są wyniki wspomnianych testów i krótkie wnioski na temat funkcji.
+W folderze "testy" zaprezentowane są wyniki wspomnianych testów i krótkie wnioski na temat metod wyboru zmiennych.
