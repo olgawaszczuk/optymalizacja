@@ -1,3 +1,6 @@
+Projekt autorstwa: Olga Waszczuk, Małgorzata Łukomska
+
+
 W pliku methods(pivot rules).py można znaleźć implementację następujących metod warunkujących wybór zmiennych wchodzących i wychodzących z programu liniowego (przy czym zachowałyśmy konwencję "nazwa_funkcji_entering" wybiera zmienną wchodzącą do programu, zaś "nazwa_funkcji_leaving" wybiera zmienną wychodzącą, bazując na zadanej regule) :
 1) largest_coefficient: 
 Funkcja wybieraja tę zmienną, przy której stoi największy współczynnik w funkcji celu.
