@@ -117,7 +117,6 @@ def smallest_coefficient_leaving(self):
 
 #2. Wybór elementu o największej różnicy współczynników w ograniczeniach 
 def max_bounds_difference_entering(self):
-    print("max bound:")
     variables = self.possible_entering()
     list_of_differences = {}
     for variable in variables:
