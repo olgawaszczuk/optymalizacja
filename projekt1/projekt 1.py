@@ -76,6 +76,7 @@ def maximal_objective_leaving(self):
                 leaving_index = set_leaving.index(variable_leave)
             print leaving_index
     return set_leaving[leaving_index]
+
 #Bland rule dla indeksu
 def bland_rule_entering(self):
     print ("bland enter:")
@@ -88,16 +89,6 @@ def bland_rule_entering(self):
         for variable_leave in get_possible_leaving(new_self, variable_enter):
             new_self2 = get_new_dictionary(new_self, variable_enter, variable_leave)
             list_variables[variable_enter] = variable_leave
-            if not new_self2.is_dual_feasible():
-                """
-                # list_variables[variable_enter] = variable_leave
-                print ("zmienne entering:")
-                print variable_enter
-                print variable_leave
-                print ("lista:")
-                print list_variables
-                print min(list_variables)
-                """
     return min(list(list_variables))
 
 def bland_rule_leaving(self, variable_enter):
@@ -106,17 +97,6 @@ def bland_rule_leaving(self, variable_enter):
     for variable_leave in get_possible_leaving(new_self, variable_enter):
         new_self = get_new_dictionary(new_self, variable_enter, variable_leave)
         list_leaving.append(variable_leave)
-        if not new_self.is_dual_feasible():
-            """
-            list_variables[variable_enter] = variable_leave
-            print ("zmienne entering:")
-            print variable_enter
-            print variable_leave
-            print ("lista:")
-            print list_variables
-            print ("min")
-            print min(list_variables.values())
-            """
     return min(list_leaving)
 #Test:
 def my_entering(self):
@@ -129,22 +109,6 @@ def my_leaving(self):
     print "Final leaving: {}".format(bland_rule_leaving(self, value_entering))
     return bland_rule_leaving(self, value_entering)
 
-
-def my_entering_lex(self):
-    print "Final entering: {}".format(lexicographical_max_entering(self))
-    return lexicographical_max_entering(self)
-    # return bland_rule_entering(self)
-
-
-def my_leaving_lex(self):
-    print "Final leaving: {}".format(lexicographical_max_leaving(self))
-    return lexicographical_max_leaving(self)
-    # return bland_rule_leaving(self)
-
-
-
-
-
 # Zad 5: Wybór losowego elementu (prawdopodobieństwo jednostajne):
 #wybór losowy zmiennej
 def random_edge_entering(self):
@@ -154,15 +118,41 @@ def random_edge_leaving(self):
 	return list(self.possible_leaving())[randrange(len(self.possible_leaving()))]
 
 # Własne funkcje:
-def max_bounds_difference_leaving(self):
+#1. Wybór zmiennej o najmniejszym współczynniku w funkcji celu
+
+#wybór mozliwych zmiennych
+def p_z_e(ss, z):
+	return list(ss.possible_entering()).index(z)
+
+#współczynnik dla danej zmiennej
+def c_e(ss, z):
+    return ss.objective_coefficients()[p_z_e(ss,z)]
+
+# Wybór zmiennej o najmniejszym wspołczynniku funkcji celu
+def smallest_coefficient_entering(self):
+    return min(self.possible_entering(), key=(lambda x: c_e(self, x) ) )
+
+#zmienne wychodzące
+def p_z_l(ss, z):
+	return ss.possible_leaving().index(z)
+
+#współczynnik w funckji celu dla danej zmiennej wchodzącej
+def c_l(ss, z):
+    return ss.objective_coefficients()[p_z_l(ss,z)]
+
+# Wybór zmiennej o najmniejszym wspołczynniku funkcji celu
+def smallest_coefficient_leaving(self):
+    return min(self.possible_leaving(), key=(lambda x: c_l(self, x) ) )
+
+#2. Wybór elementu o największej różnicy współczynników w ograniczeniach 
+def max_bounds_difference_entering(self):
     print("max bound:")
-    variables = self.possible_leaving()
+    variables = self.possible_entering()
     list_of_differences = {}
     print (variables)
     for variable in variables:
         print variable
         list_of_coefficients = self.column_coefficients(variable)
-        print list_of_coefficients
         difference = 0
         for i in range(len(list_of_coefficients)):
             difference = abs(difference - list_of_coefficients[i])
@@ -179,7 +169,50 @@ def max_bounds_difference_leaving(self):
             if temporary > maximal:
                 maximal = temporary
                 key_maximal = key
-        print("max:")
+        print("max enter:")
         print maximal
         print key_maximal
+        print variables.index(key_maximal)
     return key_maximal
+
+def max_bounds_difference_leaving(self, variable_enter):
+    new_self = deepcopy(self)
+    list_leaving = []
+    list_of_differences = {}
+    print ("TU1")
+    print new_self.nonbasic_variables()
+    for variable_leave in get_possible_leaving(new_self, variable_enter):
+        new_self = get_new_dictionary(new_self, variable_enter, variable_leave)
+        list_leaving.append(variable_leave)
+    for variable in list_leaving:
+        new_self2 = deepcopy(new_self)
+        new_self2.enter(variable_enter)
+        new_self2.leave(variable)
+        new_self2.update()
+        print ("TU")
+        print new_self2.nonbasic_variables()
+        list_of_differences = {}
+        print variable
+        list_of_coefficients = new_self2.column_coefficients(variable)
+        difference = 0
+        for i in range(len(list_of_coefficients)):
+            difference = abs(difference - list_of_coefficients[i])
+        list_of_differences[variable] = difference
+        print ("list of diff:")
+        print list_of_differences
+        maximal = 0
+        key_maximal = 0
+        for key in list_of_differences:
+            temporary = list_of_differences[key]
+            print ("temporary:")
+            print key_maximal          
+            print temporary
+            if temporary > maximal:
+                maximal = temporary
+                key_maximal = key
+        print("max enter:")
+        print maximal
+        print key_maximal
+        print list_leaving.index(key_maximal)
+    return key_maximal
+        
