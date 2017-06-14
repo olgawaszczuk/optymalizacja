@@ -165,3 +165,19 @@ def max_bounds_difference_leaving(self, variable_enter):
                 maximal = temporary
                 key_maximal = key
     return key_maximal
+
+# Porzadek leksykograficzny, minimum
+
+def lexicographical_min_entering(self):
+	return min(self.possible_entering())
+
+def lexicographical_min_leaving(self):
+	return min(self.possible_leaving())
+
+# Porzadek leksykograficzny, maximum
+
+def lexicographical_max_entering(self):
+	return max(self.possible_entering())
+
+def lexicographical_max_leaving(self):
+	return max(self.possible_leaving())
