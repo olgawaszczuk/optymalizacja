@@ -24,5 +24,5 @@ Funkcja zwraca najmniejszą zmienną wśród możliwych zmiennych wchodzących i
 Funkcja zwraca największą zmienną wśród możliwych zmiennych wchodzących i wychodzących do programu, gdzie ułożenie zmiennych podlega pod porządek leksykograficzny.
 
 
-W folderze "problems" znaleźć można 10 wybranych problemów liniowych, dla których przeprowadziłyśmy kolejno wybór zmiennych 
-file:///home/ola/Dokumenty/STUDIA/MIM%20UW/III%20rok/opta/tabela.jpg
+W folderze "problems" znaleźć można 10 wybranych problemów liniowych, dla których przeprowadziłyśmy kolejno wybór zmiennych zgodnie z każdą z wymienionych powyżej metod.
+W folderze "testy" zaprezentowane są wyniki wspomnianych testów i krótkie wnioski na temat funkcji.
