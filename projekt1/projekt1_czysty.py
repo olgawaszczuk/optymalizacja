@@ -8,7 +8,7 @@ def coef(ss, z):
     return ss.objective_coefficients()[potencjalne_zmienne(ss,z)]
 
 # Wybór zmiennej o największym wspołczynniku funkcji celu
-def largest_coefficient(self):
+def largest_coefficient_entering(self):
     return max(self.possible_entering(), key=(lambda x: coef(self, x) ) )
 
 #wybór zmiennych bazowych
@@ -79,14 +79,6 @@ def bland_rule_leaving(self, variable_enter):
         new_self = get_new_dictionary(new_self, variable_enter, variable_leave)
         list_leaving.append(variable_leave)
     return min(list_leaving)
-#Test:
-def my_entering(self):
-    return bland_rule_entering(self)
-
-
-def my_leaving(self):
-    value_entering = bland_rule_entering(self)
-    return bland_rule_leaving(self, value_entering)
 
 # Zad 5: Wybór losowego elementu (prawdopodobieństwo jednostajne):
 #wybór losowy zmiennej
@@ -134,7 +126,7 @@ def max_bounds_difference_entering(self):
         for i in range(len(list_of_coefficients)):
             difference = abs(difference - list_of_coefficients[i])
         list_of_differences[variable] = difference
-        maximal = 0
+        maximal = -1
         key_maximal = 0
         for key in list_of_differences:
             temporary = list_of_differences[key]
@@ -162,7 +154,7 @@ def max_bounds_difference_leaving(self, variable_enter):
         for i in range(len(list_of_coefficients)):
             difference = abs(difference - list_of_coefficients[i])
         list_of_differences[variable] = difference
-        maximal = 0
+        maximal = -1
         key_maximal = 0
         for key in list_of_differences:
             temporary = list_of_differences[key]
