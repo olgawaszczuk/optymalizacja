@@ -1,40 +1,44 @@
-#punkt 1: Wybór zmiennej o największym wspołczynniku funkcji celu
-
-def potencjalne_zmienne(ss, z):
-	return list(ss.possible_entering()).index(z)
-
-#wszystkie współczynniki w funkcji celu zmiennych wcześniej wybranych
-def coef(ss, z):
-    return ss.objective_coefficients()[potencjalne_zmienne(ss,z)]
-
-# Wybór zmiennej o największym wspołczynniku funkcji celu
-def largest_coefficient_entering(self):
-    return max(self.possible_entering(), key=(lambda x: coef(self, x) ) )
-
-#wybór zmiennych bazowych
-def potencjalne_zmienne_b(ss, z):
-	return ss.possible_leaving().index(z)
-
-#wszystkie współczynniki w funkcji celu zmiennych wcześniej wybranych
-def coef_b(ss, z):
-    return ss.objective_coefficients()[potencjalne_zmienne_b(ss,z)]
-
-# Wybór zmiennej o największym wspołczynniku funkcji celu
-def largest_coefficient_leaving(self):
-    return max(self.possible_leaving(), key=(lambda x: coef_b(self, x) ) )
-
-#Pkt 2. Zmienna maksymalizująca funkcję celu
+#Funkcje pomocnicze:
+# funkcja pomocnicza tworząca słownik, w którym zmienna entering wchodzi na miejsce zmiennej leaving
 def get_new_dictionary(self, entering, leaving):
     self.enter(entering)
     self.leave(leaving)
     self.update
     return self
 
+# funkcja pomocnicza zwracająca listę możliwych zmiennych wychodzących dla zadanej zmiennej wchodzącej
 def get_possible_leaving(self, entering):
     self.enter(entering)
     return list(self.possible_leaving())
-    
-     
+
+def potencjalne_zmienne(ss, z):
+	return list(ss.possible_entering()).index(z)
+
+# funkcja pomocnicza: wszystkie współczynniki w funkcji celu zmiennych wcześniej wybranych
+def coef(ss, z):
+    return ss.objective_coefficients()[potencjalne_zmienne(ss,z)]
+
+# funkcja pomocnicza: wybór zmiennych bazowych
+def potencjalne_zmienne_b(ss, z):
+	return ss.possible_leaving().index(z)
+
+# funkcja pomocnicza: wszystkie współczynniki w funkcji celu zmiennych wcześniej wybranych
+def coef_b(ss, z):
+    return ss.objective_coefficients()[potencjalne_zmienne_b(ss,z)]
+
+#Pkt 1: Wybór zmiennej o największym wspołczynniku funkcji celu
+
+# Wybór zmiennej o największym wspołczynniku funkcji celu
+def largest_coefficient_leaving(self):
+    return max(self.possible_leaving(), key=(lambda x: coef_b(self, x) ) )
+
+# Wybór zmiennej o największym wspołczynniku funkcji celu
+def largest_coefficient_entering(self):
+    return max(self.possible_entering(), key=(lambda x: coef(self, x) ) )
+
+# Pkt 2. Zmienna maksymalizująca funkcję celu
+   
+# Wybór zmniennej wchodzącej maksymalizującej funkcję celu:
 def maximal_objective_entering(self):
     set_entering = self.possible_entering()
     set_leaving = self.basic_variables()
@@ -48,6 +52,7 @@ def maximal_objective_entering(self):
                 entering_index = set_entering.index(variable_enter)
     return set_entering[entering_index]
 
+# Wybór zmniennej wychodzącej maksymalizującej funkcję celu:
 def maximal_objective_leaving(self):
     set_entering = self.possible_entering()
     set_leaving = self.basic_variables()
@@ -60,7 +65,7 @@ def maximal_objective_leaving(self):
                 leaving_index = set_leaving.index(variable_leave)
     return set_leaving[leaving_index]
 
-#Bland rule dla indeksu
+#Pkt4: Wybór zmiennej o największym indeksie:
 def bland_rule_entering(self):
     list_variables = {}
     set_entering = self.possible_entering()
@@ -91,11 +96,11 @@ def random_edge_leaving(self):
 # Własne funkcje:
 #1. Wybór zmiennej o najmniejszym współczynniku w funkcji celu
 
-#wybór mozliwych zmiennych
+# funkcja pomocnicza: wybór mozliwych zmiennych
 def p_z_e(ss, z):
 	return list(ss.possible_entering()).index(z)
 
-#współczynnik dla danej zmiennej
+# funkcja pomocnicza: współczynnik dla danej zmiennej
 def c_e(ss, z):
     return ss.objective_coefficients()[p_z_e(ss,z)]
 
@@ -103,11 +108,11 @@ def c_e(ss, z):
 def smallest_coefficient_entering(self):
     return min(self.possible_entering(), key=(lambda x: c_e(self, x) ) )
 
-#zmienne wychodzące
+# funkcja pomocnicza: zmienne wychodzące
 def p_z_l(ss, z):
 	return ss.possible_leaving().index(z)
 
-#współczynnik w funckji celu dla danej zmiennej wchodzącej
+# funkcja pomocnicza: współczynnik w funckji celu dla danej zmiennej wchodzącej
 def c_l(ss, z):
     return ss.objective_coefficients()[p_z_l(ss,z)]
 
