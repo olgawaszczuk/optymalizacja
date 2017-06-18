@@ -1,12 +1,27 @@
 dane= \
-    """\
-    1 0 1 2
-    2 0 1 2
-    2 1 2 0
-    2 1 0 1
-    1 3 0 0\
+"""\
+16 19 1 1
+18 13 0 0
+17 16 0 1
+17 6 1 0
+11 10 1 1
+2 3 1 0
+12 11 0 2
+17 11 0 1
+4 18 0 0
+8 10 0 5
+17 10 0 9
+11 10 6 1
+17 17 0 1
+0 2 0 1
+7 15 1 0
+11 6 0 1
+19 9 0 2
+11 10 4 0
+10 16 0 1
+17 13 1 0\
     """
-n = 5
+n = 20
 matrix = []
 i = 0
 j = 0
@@ -59,7 +74,7 @@ def getSelfObjectiveFunction(employee_list):
   string = ""
   for boss in employee_list:
         boss_index = employee_list.index(boss)
-        string += "e_" + str(boss_index) + "_" + str(boss_index) + " + "
+        string += "eb_" + str(boss_index) + "e_" + str(boss_index) + " + "
   return string[:-2]
    
 def getObjectiveFunction(employee_list):
@@ -67,7 +82,7 @@ def getObjectiveFunction(employee_list):
     for boss in employee_list:
         boss_index = employee_list.index(boss)
         for employee in boss["Employees"]:
-            string += "e_" + str(boss_index) + "_" + str(employee)  + "_" + str(employee_list[boss_index]["Tree"]) + " + "
+            string += "eb_" + str(boss_index) + "e_" + str(employee)  + "_" + str(employee_list[boss_index]["Tree"]) + " + "
     return string[:-2]
 
 
@@ -75,9 +90,9 @@ def getCapacityConstraint(employee_list):
     string = ""
     for boss in employee_list:
         boss_index = employee_list.index(boss)
-        string += "e_" + str(boss_index) + "_" + str(boss_index) + " + "
+        string += "eb_" + str(boss_index) + "e_" + str(boss_index) + " + "
         for employee in boss["Employees"]:
-            string += "e_" + str(boss_index) + "_" + str(employee) + "_" + str(employee_list[boss_index]["Tree"]) + " + "
+            string += "eb_" + str(boss_index) + "e_" + str(employee) + "_" + str(employee_list[boss_index]["Tree"]) + " + "
         string = string[:-2] + "<= " + str(employee_list[boss_index]["ToFire"]) + "\n"
     return string
 
@@ -86,13 +101,13 @@ def getConservationConstraint(employee_list):
     string = ""
     for boss in employee_list:
         boss_index = employee_list.index(boss)
-        string += "e_" + str(boss_index) + "_" + str(boss_index) + " + "
+        string += "eb_" + str(boss_index) + "e_" + str(boss_index) + " + "
         for employee in boss["Employees"]:
-            string += "e_" + str(boss_index) + "_" + str(employee)  + "_" + str(employee_list[boss_index]["Tree"]) + " + "
+            string += "eb_" + str(boss_index) + "e_" + str(employee)  + "_" + str(employee_list[boss_index]["Tree"]) + " + "
         if(boss_index == employee_list[boss_index]["Boss"]):
             string = string[:-2] + " <= " + str(employee_list[boss_index]["ToFire"]) + "\n"
         else:
-            string = string[:-2] + "- e_" + str(employee_list[boss_index]["Boss"]) + "_" + str(boss_index) + "_" +  str(employee_list[boss_index]["Tree"]) +  " = 0\n"
+            string = string[:-2] + "- eb_" + str(employee_list[boss_index]["Boss"]) + "e_" + str(boss_index) + "_" +  str(employee_list[boss_index]["Tree"]) +  " = 0\n"
 
     return string
 
@@ -100,7 +115,7 @@ def getSelfBounds(employee_list):
   string = ""
   for boss in employee_list:
     boss_index = employee_list.index(boss)
-    string += "0 <= " +  "e_" + str(boss_index) + "_" + str(boss_index) + " <= 1 \n"
+    string += "0 <= " +  "eb_" + str(boss_index) + "e_" + str(boss_index) + " <= 1 \n"
   return string
   
 def getBounds(employee_list):
@@ -109,14 +124,14 @@ def getBounds(employee_list):
         boss_index = employee_list.index(boss)
         for employee in boss["Employees"]:
            toFire = employee_list[employee]["ToFire"]
-           string += "0 <= e_" + str(boss_index) + "_" + str(employee) + "_" + str(employee_list[boss_index]["Tree"]) + " <= " + str(toFire) + "\n"
+           string += "0 <= eb_" + str(boss_index) + "e_" + str(employee) + "_" + str(employee_list[boss_index]["Tree"]) + " <= " + str(toFire) + "\n"
     return string
 
 def getSelfGenerals(employee_list):
   string = ""
   for boss in employee_list:
       boss_index = employee_list.index(boss)
-      string += "e_" + str(boss_index) + "_" + str(boss_index) + "\n" 
+      string += "eb_" + str(boss_index) + "e_" + str(boss_index) + "\n" 
   return string
 
 def getGenerals(employee_list):
@@ -124,7 +139,7 @@ def getGenerals(employee_list):
     for boss in employee_list:
         boss_index = employee_list.index(boss)
         for employee in boss["Employees"]:
-            string += "e_" + str(boss_index) + "_" + str(employee) + "_" + str(employee_list[boss_index]["Tree"]) + "\n"
+            string += "eb_" + str(boss_index) + "e_" + str(employee) + "_" + str(employee_list[boss_index]["Tree"]) + "\n"
     return string
 
 
