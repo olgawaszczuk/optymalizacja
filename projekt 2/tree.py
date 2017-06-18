@@ -92,7 +92,7 @@ def getConservationConstraint(employee_list):
         if(boss_index == employee_list[boss_index]["Boss"]):
             string = string[:-2] + " <= " + str(employee_list[boss_index]["ToFire"]) + "\n"
         else:
-            string = string[:-2] + "- e_" + str(boss_index) + "_" + str(employee_list[boss_index]["Boss"]) +  " = 0\n"
+            string = string[:-2] + "- e_" + str(employee_list[boss_index]["Boss"]) + "_" + str(boss_index) +  " = 0\n"
 
     return string
 
