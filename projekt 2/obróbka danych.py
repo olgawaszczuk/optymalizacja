@@ -11,6 +11,7 @@ for item in dane.split(","):
   current = item.strip("\r").split(":")
   matrix.append(current)
 
+print "Indeksy zwolnionych pracowników:"
 print matrix
 count = 0
 for i in range(len(matrix)):
