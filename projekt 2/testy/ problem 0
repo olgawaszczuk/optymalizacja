@@ -1,0 +1,70 @@
+Problem liniowy wygenerowany przez program:
+Maximize
+eb_0e_0 + eb_1e_1 + eb_2e_2 + eb_3e_3 + eb_4e_4 
+
+Subject To
+eb_0e_0 <= 0
+eb_1e_1 + eb_1e_0_0 + eb_1e_4_0 <= 2
+eb_2e_2 + eb_2e_1_0 + eb_2e_3_0 <= 3
+eb_3e_3 <= 1
+eb_4e_4 <= 1
+
+eb_0e_0 + eb_0e_1_1 <= 3
+eb_1e_1 + eb_1e_2_1 + eb_1e_3_1 <= 2
+eb_2e_2 <= 1
+eb_3e_3 + eb_3e_4_1 <= 1
+eb_4e_4 <= 1
+
+eb_0e_0 - eb_1e_0_0 = 0
+eb_1e_1 + eb_1e_0_0 + eb_1e_4_0 - eb_2e_1_0 = 0
+eb_2e_2 + eb_2e_1_0 + eb_2e_3_0  <= 3
+eb_3e_3 - eb_2e_3_0 = 0
+eb_4e_4 - eb_1e_4_0 = 0
+
+eb_0e_0 + eb_0e_1_1  <= 3
+eb_1e_1 + eb_1e_2_1 + eb_1e_3_1 - eb_0e_1_1 = 0
+eb_2e_2 - eb_1e_2_1 = 0
+eb_3e_3 + eb_3e_4_1 - eb_1e_3_1 = 0
+eb_4e_4 - eb_3e_4_1 = 0
+
+
+Bounds
+0 <= eb_0e_0 <= 1 
+0 <= eb_1e_1 <= 1 
+0 <= eb_2e_2 <= 1 
+0 <= eb_3e_3 <= 1 
+0 <= eb_4e_4 <= 1 
+
+0 <= eb_1e_0_0 <= 0
+0 <= eb_1e_4_0 <= 1
+0 <= eb_2e_1_0 <= 2
+0 <= eb_2e_3_0 <= 1
+
+0 <= eb_0e_1_1 <= 2
+0 <= eb_1e_2_1 <= 1
+0 <= eb_1e_3_1 <= 1
+0 <= eb_3e_4_1 <= 1
+
+
+Generals
+eb_0e_0
+eb_1e_1
+eb_2e_2
+eb_3e_3
+eb_4e_4
+
+eb_1e_0_0
+eb_1e_4_0
+eb_2e_1_0
+eb_2e_3_0
+
+eb_0e_1_1
+eb_1e_2_1
+eb_1e_3_1
+eb_3e_4_1
+
+
+End
+
+Rozwiązanie (zmienna eb_(index)e_(index) = 1 jeśli zwalniamy pracownika o numerze index, 0 jeśli pracownika nie zwalniamy)
+{"eb_0e_0":0,"eb_1e_1":0,"eb_2e_2":1,"eb_3e_3":0,"eb_4e_4":1}
