@@ -20,15 +20,12 @@ for line in dane.split("\n"):
             pass
     matrix.append(current)
 
-print("LOADED:")
-print(matrix)
-
 
 def get_employees_lists(tree, matrix):
-    print "Tree : " + str(tree)
     employees_list = []
     for node_i in range(len(matrix)):
-        number_of_employees = {"Count": count(tree, node_i, matrix),
+        number_of_employees = {"Self": node_i,
+                              "Count": count(tree, node_i, matrix),
                                "ToFire": count(tree, node_i, matrix) - matrix[node_i][tree + 2],
                                "Tree": tree,
                                "Boss": matrix[node_i][tree],
@@ -53,7 +50,7 @@ def get_employees_under_boss(boss_id, tree, matrix):
         if node[tree] == boss_id:
             if not matrix.index(node) == boss_id:
                 employees_index_list.append(matrix.index(node))
-    return employees_index_list
+    return list(set(employees_index_list))
 
 def getSelfObjectiveFunction(employee_list):
   string = ""
