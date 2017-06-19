@@ -74,15 +74,6 @@ def getSelfObjectiveFunction(employee_list):
         string += "eb_" + str(boss_index) + "e_" + str(boss_index) + " + "
   return string[:-2]
    
-def getObjectiveFunction(employee_list):
-    string = ""
-    for boss in employee_list:
-        boss_index = employee_list.index(boss)
-        for employee in boss["Employees"]:
-            string += "eb_" + str(boss_index) + "e_" + str(employee)  + "_" + str(employee_list[boss_index]["Tree"]) + " + "
-    return string[:-2]
-
-
 def getCapacityConstraint(employee_list):
     string = ""
     for boss in employee_list:
