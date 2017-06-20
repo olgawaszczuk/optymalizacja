@@ -163,3 +163,5 @@ print getSelfGenerals(tree0)
 print getGenerals(tree0)
 print getGenerals(tree1)
 print "\nEnd"
+
+#Uwaga techniczna : funkcja pisana jest pod kompilator języka Python, nie pod Sage.
