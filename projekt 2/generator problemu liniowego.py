@@ -1,3 +1,4 @@
+#Poniżej wprowadzamy dane do problemu.
 dane= \
 """\
 16 19 1 1
@@ -26,6 +27,7 @@ matrix = []
 i = 0
 j = 0
 
+# Zapisujemy dane do postaci tabeli:
 for line in dane.split("\n"):
     current = []
     for element in line.strip("\r").split(" "):
@@ -35,7 +37,29 @@ for line in dane.split("\n"):
             pass
     matrix.append(current)
 
+# Funkcja licząca ilu podwładnych (łącznie z sobą) ma dany pracownik (boss_i) w wybranej (tree):
+def count(tree, boss_i, matrix):
+    number = 1
+    for node_i in range(len(matrix)):
+        if node_i == boss_i:
+            continue
+        if matrix[node_i][tree] == boss_i:
+            number += count(tree, node_i, matrix)
+    return number
 
+# Funkcja wypisująca podwładnych, których pracownik ma w ramach wybranej organizacji:
+def get_employees_under_boss(boss_id, tree, matrix):
+    employees_index_list = []
+    for node in matrix:
+        if node[tree] == boss_id:
+            if not matrix.index(node) == boss_id:
+                employees_index_list.append(matrix.index(node))
+    return list(set(employees_index_list))
+
+# Funkcja zwracająca słownik opisujący strukturę wybranej organizacji, tzn taki, w którym do każdego pracownika przypisane zostają: 
+#"Self" - jego własny indeks, "Count" - liczba jego podwładnych,
+#"ToFire" - maksymalna liczba jego podwładnych (łącznie z nim), która może zostać zwolniona, "Tree" - organizację dla której opisywana jest hierarchia,
+#"Boss" - indeks szefa tego pracownika, "Employees" - listę podwładnych tego pracownika (bez niego):
 def get_employees_lists(tree, matrix):
     employees_list = []
     for node_i in range(len(matrix)):
@@ -48,32 +72,15 @@ def get_employees_lists(tree, matrix):
         employees_list.append(number_of_employees)
     return employees_list
 
-
-def count(tree, boss_i, matrix):
-    number = 1
-    for node_i in range(len(matrix)):
-        if node_i == boss_i:
-            continue
-        if matrix[node_i][tree] == boss_i:
-            number += count(tree, node_i, matrix)
-    return number
-
-
-def get_employees_under_boss(boss_id, tree, matrix):
-    employees_index_list = []
-    for node in matrix:
-        if node[tree] == boss_id:
-            if not matrix.index(node) == boss_id:
-                employees_index_list.append(matrix.index(node))
-    return list(set(employees_index_list))
-
+# Funkcja zwracająca tekst będący funkcją celu programu liniowego:
 def getSelfObjectiveFunction(employee_list):
   string = ""
   for boss in employee_list:
         boss_index = employee_list.index(boss)
         string += "eb_" + str(boss_index) + "e_" + str(boss_index) + " + "
   return string[:-2]
-   
+
+# Funkcja zwracająca tekst będący ograniczeniami typu a (dopkładny opis ograniczeń i zmiennych zawarty jest w raporcie) programu liniowego:
 def getCapacityConstraint(employee_list):
     string = ""
     for boss in employee_list:
@@ -84,7 +91,7 @@ def getCapacityConstraint(employee_list):
         string = string[:-2] + "<= " + str(employee_list[boss_index]["ToFire"]) + "\n"
     return string
 
-
+# Funkcja zwracająca tekst będący ograniczeniami typu b programu liniowego:
 def getConservationConstraint(employee_list):
     string = ""
     for boss in employee_list:
@@ -99,13 +106,15 @@ def getConservationConstraint(employee_list):
 
     return string
 
+# Funkcja zwracająca tekst będący ograniczeniami dla zmiennych pierwszego typu programu liniowego:
 def getSelfBounds(employee_list):
   string = ""
   for boss in employee_list:
     boss_index = employee_list.index(boss)
     string += "0 <= " +  "eb_" + str(boss_index) + "e_" + str(boss_index) + " <= 1 \n"
   return string
-  
+ 
+# Funkcja zwracająca tekst będący ograniczeniami dla zmiennych drugiego typu (krawędzi) programu liniowego:
 def getBounds(employee_list):
     string = ""
     for boss in employee_list:
@@ -115,6 +124,7 @@ def getBounds(employee_list):
            string += "0 <= eb_" + str(boss_index) + "e_" + str(employee) + "_" + str(employee_list[boss_index]["Tree"]) + " <= " + str(toFire) + "\n"
     return string
 
+# Funkcja wypisująca zmienne pierwszego typu:
 def getSelfGenerals(employee_list):
   string = ""
   for boss in employee_list:
@@ -122,6 +132,7 @@ def getSelfGenerals(employee_list):
       string += "eb_" + str(boss_index) + "e_" + str(boss_index) + "\n" 
   return string
 
+# Funkcja wypisująca zmienne drugiego typu:
 def getGenerals(employee_list):
     string = ""
     for boss in employee_list:
@@ -131,9 +142,11 @@ def getGenerals(employee_list):
     return string
 
 
-
+# Przypisanie drzew do odpowiedniej struktury organizacji:
 tree0 = get_employees_lists(0, matrix)
 tree1 = get_employees_lists(1, matrix)
+
+# Wypisywanie problemu liniowego:
 print "\nMaximize"
 print getSelfObjectiveFunction(tree0)
 print "\nSubject To"
