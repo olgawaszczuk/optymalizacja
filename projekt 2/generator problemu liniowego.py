@@ -164,4 +164,4 @@ print getGenerals(tree0)
 print getGenerals(tree1)
 print "\nEnd"
 
-#Uwaga techniczna : funkcja pisana jest pod kompilator języka Python, nie pod Sage.
+#Uwaga techniczna : program pisany jest pod kompilator języka Python, nie pod Sage.
